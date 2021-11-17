@@ -1,0 +1,24 @@
+#title {
+  text-align: center;
+  margin: 50px 0px 20px 0px;
+}
+
+#input-demo {
+  width: 80%;
+  text-align: center;
+  margin-left: 10%;
+}
+
+#demo-list {
+  width: 80%;
+  text-align: center;
+  margin-left: 10%;
+}
+
+#demo-key {
+  margin-right: 100px;
+}
+
+#demo-description {
+  margin-right: 50px;
+}
