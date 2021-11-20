@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import './app.css';
 
 export default class App extends Component {
-  state = { username: 'Tuan' };
+  state = { result: null };
 
+  toggleButtonState = () => {
+    let selectedWord = window.getSelection().toString();
+    fetch('http://localhost:8080/jason').then(result => {
+      this.setState({ result });
+    });
+  };
 
   render() {
     const { username } = this.state;
     return (
       <div>
-        {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
+        <button onClick={this.toggleButtonState}> Click me </button>
       </div>
     );
   }

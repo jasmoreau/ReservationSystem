@@ -6,18 +6,44 @@ const app = express();
 
 app.use(cors());
 
-// app.use(express.static('dist'));
+const inFile = 'input.txt'
+const outFile = 'output.txt'
 
-app.get('/userInfo', async(req, res)=>{
+const fs = require('fs');
+
+app.get('/jason', async(req, res)=>{
     try{
-      console.log('TEST');
-      const allDemos = await pool.query(`SELECT * FROM user`);
+      let sql;
+      console.log('WORK');
+      await fs.readFile(inFile, 'utf8', function (err,data) {
+        if (err) {
+          return console.log(err);
+        }
+        sql = data;
+      });
+      const allDemos = await pool.query(sql);
     //   res.json(allDemos.rows);
+      await fs.writeFile(outFile, allDemos.rows, (err) => {
+      
+        // In case of a error throw err.
+        if (err) throw err;
+      })
       console.log(allDemos);
     } catch(err){
       console.log(err.message);
     }
 });
+
+// app.get('/userInfo', async(req, res)=>{
+//     try{
+//       console.log('TEST');
+//       const allDemos = await pool.query(`SELECT * FROM user`);
+//     //   res.json(allDemos.rows);
+//       console.log(allDemos);
+//     } catch(err){
+//       console.log(err.message);
+//     }
+// });
 
 // app.get('/userInfo', async(req, res)=>{
 //     try{

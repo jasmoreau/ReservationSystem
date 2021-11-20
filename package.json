@@ -1,7 +1,7 @@
 {
   "name": "simple-react-full-stack",
   "version": "1.0.0",
-  "description": "Boilerplate to build a full stack web application using React, Node.js, Express and Webpack.",
+  "description": "Reservation Application",
   "main": "src/server/index.js",
   "scripts": {
     "build": "webpack --mode production",
@@ -10,19 +10,23 @@
     "server": "nodemon src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "author":"Tuan Tran",
+  "author": "Tuan Tran",
   "license": "ISC",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "bootstrap": "^5.1.3",
     "cors": "^2.8.5",
     "express": "^4.16.3",
     "pg": "^8.7.1",
+    "prop-types": "^15.7.2",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "typescript": "^4.5.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.16.0",
     "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.0",
