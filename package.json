@@ -1,51 +1,44 @@
 {
-  "name": "simple-react-full-stack",
+  "name": "react-auth-example",
   "version": "1.0.0",
-  "description": "Reservation Application",
-  "main": "src/server/index.js",
-  "scripts": {
-    "build": "webpack --mode production",
-    "start": "npm run build && node src/server/index.js",
-    "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
-    "server": "nodemon src/server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
-  },
-  "author": "Tuan Tran",
-  "license": "ISC",
+  "private": true,
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
-    "bootstrap": "^5.1.3",
-    "cors": "^2.8.5",
-    "express": "^4.16.3",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "dateformat": "^5.0.2",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.13",
     "pg": "^8.7.1",
-    "prop-types": "^15.7.2",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "typescript": "^4.5.2"
+    "react": "^17.0.2",
+    "react-datepicker": "^4.3.0",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "react-numeric-input": "^2.2.3",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-table": "^7.7.0",
+    "styled-components": "^5.3.3"
   },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "server": "node server.js",
+    "dev": "npm run server && npm start",
+    "server-dev": "nodemon server.js"
+  },
+  "proxy": "http://localhost:8080",
   "devDependencies": {
-    "@babel/cli": "^7.16.0",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.16.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-eslint": "^10.0.0",
-    "babel-loader": "^8.0.0",
-    "clean-webpack-plugin": "^1.0.0",
-    "concurrently": "^4.0.0",
-    "css-loader": "^2.0.0",
-    "eslint": "^5.0.0",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
-    "file-loader": "^3.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "nodemon": "^1.17.3",
-    "style-loader": "^0.23.0",
-    "url-loader": "^1.0.1",
-    "webpack": "^4.5.0",
-    "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.3"
-  }
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.0"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
