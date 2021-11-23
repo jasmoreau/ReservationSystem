@@ -28,7 +28,7 @@ export const RegisterBox = (props) => {
     const onSubmit = (event) => {
         event.preventDefault();
 
-        const object = {email: email, value: value};
+        const object = {email: email, password: password};
 
         fetch('/api/register', {
         method: 'POST',
