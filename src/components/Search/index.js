@@ -92,7 +92,7 @@ export const Search = (props) => {
 
     const toggleButtonState = async () => {
         try{
-          generate()
+          generate(numPeople)
         }
         catch(err){
           console.log(err.message);
