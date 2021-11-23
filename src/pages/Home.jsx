@@ -16,19 +16,19 @@ export const Home = (props) => {
   const [cannotSeat, setCannotSeat] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  fetch('/checkToken')
-  .then(res => {
-    if (res.status === 200) {
-      setLoggedIn(true);
-    } else {
-      const error = new Error(res.error);
-      setLoggedIn(false);
-      throw error;
-    }
-  })
-  .catch(err => {
-    console.error(err);
-  });
+  // fetch('/checkToken')
+  // .then(res => {
+  //   if (res.status === 200) {
+  //     setLoggedIn(true);
+  //   } else {
+  //     const error = new Error(res.error);
+  //     setLoggedIn(false);
+  //     throw error;
+  //   }
+  // })
+  // .catch(err => {
+  //   console.error(err);
+  // });
   
   return (
     <div>
