@@ -49,6 +49,8 @@ app.post('/api/register', function(req, res) {
       res.status(500).send("Error registering new user please try again.");
     } else {
       res.status(200).send("Welcome to the club!");
+
+      pool.query(`INSERT INTO customer (email) VALUES ('`+email+`')`);
     }
   });
 });
@@ -125,6 +127,17 @@ app.post('/api/search', async(req, res)=>{
     console.log(err.message);
   }
 });
+
+app.post('/getdata', withAuth, async(req, res) => {
+  try{
+    const email = req.email
+    const userData = await pool.query(`SELECT * FROM customer WHERE email LIKE'`+req.email+`' LIMIT 1;`)
+    res.json(userData.rows)
+  }
+  catch(err){
+    console.log(err.message);
+  }
+})
 
 app.post('/api/reserve', async(req, res) => {
   try{
