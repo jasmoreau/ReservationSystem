@@ -15,7 +15,7 @@ export const LoginBox = (props) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-  
+
     const navigate = useNavigate();
     const handleEmailChange = (event) => {
         const { value } = event.target;
@@ -28,9 +28,11 @@ export const LoginBox = (props) => {
 
     const onSubmit = (event) => {
         event.preventDefault();
+        const object = {email: email, password:password};
+
         fetch('/api/authenticate', {
         method: 'POST',
-        body: JSON.stringify(this.state),
+        body: JSON.stringify(object),
         headers: {
             'Content-Type': 'application/json'
         }
