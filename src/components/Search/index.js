@@ -15,9 +15,10 @@ export const Search = (props) => {
 
     const [numPeople, setNumPeople] = useState(1);
 
-    const generate = async () => {
+    const generate = async (value) => {
         try{
         props.setCannotSeat(false);
+        
         const date = props.startDate;
         const dateT = dateFormat(date, "yyyy-mm-dd H:MM:ss")
         const response = await fetch('/api/search',{
@@ -29,9 +30,10 @@ export const Search = (props) => {
         //console.log(jsonResponse)
         var jsonData = []
         var validSeating = false
-        var n = 0
+        var n = 0;
+        
         for(var index = 0; index < jsonResponse.length; ++index){
-          if(jsonResponse[index].max_size >= numPeople){
+          if(jsonResponse[index].max_size >= value){
             validSeating = true
             jsonData[n] = jsonResponse[index]
             n++
@@ -43,7 +45,7 @@ export const Search = (props) => {
         })
 
         var combination = []
-        var remaining = numPeople;
+        var remaining = value;
         var new_max = 0;
         if(!validSeating){
           var combinationPossible = false
@@ -77,7 +79,7 @@ export const Search = (props) => {
           }
         }
     
-
+        setNumPeople(value);
         props.setData(jsonData);
         props.setShowMessage(true);
 
@@ -114,7 +116,7 @@ export const Search = (props) => {
             showTimeSelect 
             dateFormat="MMMM d, yyyy h:mm aa"/>
             <Form>
-            <NumericInp format={myFormat} min={1} value={numPeople} onChange={value => {setNumPeople(value); generate()}}/>
+            <NumericInp format={myFormat} min={1} value={numPeople} onChange={ async (value) => {await generate(value)}}/>
             </Form>
             <Button onClick={toggleButtonState}> Find Table </Button>
         </FuncWrapper>

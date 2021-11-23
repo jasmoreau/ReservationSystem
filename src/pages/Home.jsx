@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import {Search} from '../components/Search/index';
 import {Display} from '../components/Display/index';
 import { Navbar } from '../components/NavBar';
+import {LoggedInBar} from '../components/LoggedInBar';
 
 export const Home = (props) => {
   const today = new Date()
@@ -13,10 +14,28 @@ export const Home = (props) => {
   const [data, setData] = useState('');
   const [startDate, setStartDate] = useState(today);
   const [cannotSeat, setCannotSeat] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  fetch('/checkToken')
+  .then(res => {
+    if (res.status === 200) {
+      setLoggedIn(true);
+    } else {
+      const error = new Error(res.error);
+      setLoggedIn(false);
+      throw error;
+    }
+  })
+  .catch(err => {
+    console.error(err);
+  });
   
   return (
     <div>
-      <Navbar/>
+      <div>
+      {(<Navbar/>) }
+      {/* {(<LoggedInBar />)} */}
+      </div>
       <Search 
         setStartDate={setStartDate.bind(this)} 
         setShowMessage={setShowMessage.bind(this)} 
