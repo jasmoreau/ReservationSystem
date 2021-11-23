@@ -13,6 +13,7 @@ export const Home = (props) => {
   const [showMessage, setShowMessage] = useState(false);
   const [data, setData] = useState('');
   const [startDate, setStartDate] = useState(today);
+  const [dateT, setDateT] = useState('');
   const [cannotSeat, setCannotSeat] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -41,20 +42,24 @@ export const Home = (props) => {
         setShowMessage={setShowMessage.bind(this)} 
         setData={setData.bind(this)}
         setCannotSeat={setCannotSeat.bind(this)}
+        setDateT={setDateT.bind(this)}
         showMessage={showMessage}
         data={data}
         startDate={startDate}
         cannotSeat={cannotSeat}
+        dateT={dateT}
       />
       <Display 
         setStartDate={setStartDate.bind(this)} 
         setShowMessage={setShowMessage.bind(this)} 
         setData={setData.bind(this)}
         setCannotSeat={setCannotSeat.bind(this)}
+        setDateT={setDateT.bind(this)}
         showMessage={showMessage}
         data={data}
         startDate={startDate}
         cannotSeat={cannotSeat}
+        dateT={dateT}
       />
     </div>
   );

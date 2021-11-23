@@ -82,6 +82,7 @@ export const Search = (props) => {
         setNumPeople(value);
         props.setData(jsonData);
         props.setShowMessage(true);
+        props.setDateT(dateT)
 
         }
         catch(err){

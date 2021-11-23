@@ -15,9 +15,10 @@ export const BasicTable = (props) => {
     
     const navigate = useNavigate();
     const reservePage = (event) => {
+        console.log(event)
         event.preventDefault();
         const {value} = event.target;
-        navigate(`/reserve/${value}`);
+        navigate(`/reserve/${value}+${props.dateT}`);
     }
 
     return(

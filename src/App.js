@@ -17,7 +17,7 @@ class App extends Component {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/aboutme" element={<AboutMe/>} />
-          <Route path="/reserve/:id" element={<Reservation/>} />
+          <Route path="/reserve/:id+:dateT" element={<Reservation/>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
