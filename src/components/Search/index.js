@@ -1,34 +1,24 @@
-import React, { Component, useState } from 'react';
-import DatePicker from 'react-datepicker'
-import NumericInput from 'react-numeric-input';
-import dateFormat, { masks } from "dateformat";
+import React, { useState } from 'react';
+import dateFormat from "dateformat";
 import 'react-datepicker/dist/react-datepicker.css'
+import {
+    Wrapper, 
+    Word,
+    FuncWrapper,
+    DatePick,
+    Form,
+    NumericInp,
+    Button
+} from './SearchElements';
 
-export default class Search extends Component {
-    constructor(props){
-        super(props); 
-        this.state = { 
-            showMessage: props.state.showMessage, 
-            data: props.state.data,
-            startDate: props.state.startDate,
-            numPeople: props.state.numPeople,
-            cannotSeat: props.state.cannotSeat
-        }
-    }
+export const Search = (props) => {
 
-    toggleButtonState = async () => {
+    const [numPeople, setNumPeople] = useState(1);
+
+    const generate = async () => {
         try{
-          this.generate()
-        }
-        catch(err){
-          console.log(err.message);
-        }
-      };
-    
-    generate = async () => {
-        try{
-        this.props.cannotSeat(false);
-        const date = this.state.startDate
+        props.setCannotSeat(false);
+        const date = props.startDate;
         const dateT = dateFormat(date, "yyyy-mm-dd H:MM:ss")
         const response = await fetch('/api/search',{
           method: "POST",
@@ -41,7 +31,7 @@ export default class Search extends Component {
         var validSeating = false
         var n = 0
         for(var index = 0; index < jsonResponse.length; ++index){
-          if(jsonResponse[index].max_size >= this.state.numPeople){
+          if(jsonResponse[index].max_size >= numPeople){
             validSeating = true
             jsonData[n] = jsonResponse[index]
             n++
@@ -53,7 +43,7 @@ export default class Search extends Component {
         })
 
         var combination = []
-        var remaining = this.state.numPeople;
+        var remaining = numPeople;
         var new_max = 0;
         if(!validSeating){
           var combinationPossible = false
@@ -82,15 +72,15 @@ export default class Search extends Component {
             }
           }
           if(!combinationPossible){
-            this.props.cannotSeat(true)
+            props.setCannotSeat(true)
             jsonData = []
           }
         }
-        console.log(jsonData)
     
 
-        this.props.changeData(jsonData);
-        this.props.showMessage(true);
+        props.setData(jsonData);
+        props.setShowMessage(true);
+
         }
         catch(err){
           console.log(err.message);
@@ -98,26 +88,40 @@ export default class Search extends Component {
         
       };
 
-      
-    render(){
-        return(
-        <>
-        <div>
-            <DatePicker 
-            selected={this.state.startDate} 
-            onChange={this.state.handleChange}
+    const toggleButtonState = async () => {
+        try{
+          generate()
+        }
+        catch(err){
+          console.log(err.message);
+        }
+      };
+
+    const myFormat = (num) => {
+        return num + ' people';
+    }
+
+    return(
+    <>
+    <Wrapper>
+        <Word>
+            Reserve Table Here
+        </Word>
+        <FuncWrapper>
+            <DatePick
+            selected={props.startDate} 
+            onChange={(date) => props.setStartDate(date)}
             showTimeSelect 
             dateFormat="MMMM d, yyyy h:mm aa"/>
-            <form>
-            <label>Number of people:
-                <NumericInput min={1} value={this.state.numPeople} onChange={value => {this.setState({numPeople: value}); this.generate()}}/>
-            </label>
-            </form>
-            <button onClick={this.toggleButtonState}> Click me </button>
-        </div>
-        </>
-        );
-    }
+            <Form>
+            <NumericInp format={myFormat} min={1} value={numPeople} onChange={value => {setNumPeople(value); generate()}}/>
+            </Form>
+            <Button onClick={toggleButtonState}> Find Table </Button>
+        </FuncWrapper>
+    </Wrapper>
+    </>
+    );
+    
 }
 
 

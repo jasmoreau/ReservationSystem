@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const User = require('./models/User');
 const withAuth = require('./middleware');
 const pool = require('./creds.js');
+const { application } = require('express');
 const app = express();
 
 const secret = 'mysecretsshhh';
@@ -124,5 +125,14 @@ app.post('/api/search', async(req, res)=>{
     console.log(err.message);
   }
 });
+
+app.post('/api/reserve', async(req, res) => {
+  try{
+    //TODO
+  }
+  catch(err){
+    console.log(err.message);
+  }
+})
 
 app.listen(process.env.PORT || 8080);
