@@ -3,7 +3,7 @@
 
 To run the application first clone the repository
 ```
-git clone https://github.com/faizanv/react-auth-example.git
+git clone 
 ```
 
 Install the dependencies
