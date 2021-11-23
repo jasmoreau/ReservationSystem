@@ -18,6 +18,7 @@ export const ReservationBox = (props) => {
           });
         const jsonResponse = await response.json()
         console.log("in")
+        console.log(jsonResponse)
         setUserData(jsonResponse)
     }
 
@@ -31,6 +32,11 @@ export const ReservationBox = (props) => {
             <hr/>
             <p>{id}</p>
             <p>{dateT}</p>
+            <form>
+                <label>
+
+                </label>
+            </form>
             <button onClick={print}>Button</button>
         </div>
     )

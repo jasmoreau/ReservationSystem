@@ -128,16 +128,60 @@ app.post('/api/search', async(req, res)=>{
   }
 });
 
-app.post('/getdata', withAuth, async(req, res) => {
+app.post('/getdata', async(req, res) => {
   try{
-    const email = req.email
-    const userData = await pool.query(`SELECT * FROM customer WHERE email LIKE'`+req.email+`' LIMIT 1;`)
-    res.json(userData.rows)
+    var user = false;
+
+    const token = 
+    req.body.token ||
+    req.query.token ||
+    req.headers['x-access-token'] ||
+    req.cookies.token;
+
+    if (!token) {
+    } else {
+      jwt.verify(token, secret, function(err, decoded) {
+        if (!err) {
+          user = true;
+          req.email = decoded.email;
+        }
+      });
+    }
+
+    if(!user)
+      res.json({'userid': null,'email': null,'first_name': null,"last_name": null,"mailing_addr": null,"billing_addr": null,"points": null,"preferred_payment": null})
+    else{
+      const userData = await pool.query(`SELECT * FROM customer WHERE email LIKE '`+req.email+`' LIMIT 1;`)
+      console.log(userData.rows)
+      res.json(userData.rows)
+    }
+    
   }
-  catch(err){
-    console.log(err.message);
-  }
+
+catch(err){
+  console.log(err.message);z
+}
 })
+
+// app.post('/getdata', withAuth, async(req, res) => {
+//   try{
+//     const email = ""
+//     if(req.email)
+//       email = req.email
+//     if(email.length > 0){
+//       const userData = await pool.query(`SELECT * FROM customer WHERE email LIKE'`+req.email+`' LIMIT 1;`)
+//       res.json(userData.rows)
+//     }
+//     else{
+//       res.json(`{"userid": null,"email": null,"first_name": null,"last_name": null,"mailing_addr": null,"billing_addr": null,"points": null,"preferred_payment": null}`)
+//     }
+//     res.json("BALLS")
+//   }
+//   catch(err){
+//     console.log(err.message)
+//   }
+// })
+
 
 app.post('/api/reserve', async(req, res) => {
   try{
