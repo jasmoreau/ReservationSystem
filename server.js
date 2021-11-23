@@ -149,7 +149,7 @@ app.post('/getdata', async(req, res) => {
     }
 
     if(!user)
-      res.json({'userid': null,'email': null,'first_name': null,"last_name": null,"mailing_addr": null,"billing_addr": null,"points": null,"preferred_payment": null})
+      res.json([{'userid': null,'email': null,'first_name': null,"last_name": null,"mailing_addr": null,"billing_addr": null,"points": null,"preferred_payment": null}])
     else{
       const userData = await pool.query(`SELECT * FROM customer WHERE email LIKE '`+req.email+`' LIMIT 1;`)
       console.log(userData.rows)
