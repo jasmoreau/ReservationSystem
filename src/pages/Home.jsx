@@ -1,9 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {Search} from '../components/Search/index';
 import {Display} from '../components/Display/index';
 import { Navbar } from '../components/NavBar';
 import {LoggedInBar} from '../components/LoggedInBar';
+
+const getData = async() => {
+  await fetch('/getdata', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+        })
+  .then(res => {
+    return res;
+  })
+  .catch(err => {
+    console.error(err);
+  });
+}
 
 export const Home = (props) => {
   const today = new Date()
@@ -16,26 +31,28 @@ export const Home = (props) => {
   const [dateT, setDateT] = useState('');
   const [cannotSeat, setCannotSeat] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userData, setUserData] = useState({});
 
-  // fetch('/checkToken')
-  // .then(res => {
-  //   if (res.status === 200) {
-  //     setLoggedIn(true);
-  //   } else {
-  //     const error = new Error(res.error);
-  //     setLoggedIn(false);
-  //     throw error;
-  //   }
-  // })
-  // .catch(err => {
-  //   console.error(err);
-  // });
+  useEffect(() => {
+    const res = getData();
+    console.log(res.status);
+    if (res.status === 200) {
+      setLoggedIn(true);
+      setUserData(res.json());
+      console.log(res.json());
+    } else {
+      const error = new Error(res.error);
+      setLoggedIn(false);
+    }
+  }, [userData, loggedIn]);
+  
+
   
   return (
     <div>
       <div>
-      {(<Navbar/>) }
-      {/* {(<LoggedInBar />)} */}
+      <Navbar/>
+      {/* {<LoggedInBar/>} */}
       </div>
       <Search 
         setStartDate={setStartDate.bind(this)} 

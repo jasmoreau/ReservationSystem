@@ -8,13 +8,14 @@ import {
     NavBtn,
     NavBtnLink,
     Logo
-    } from './LoggedInBarElements';
+} from './LoggedInBarElements';
 import LogoImg from './uh.png';
     
     
 export const LoggedInBar = () => {
     return (
-        <>
+        
+        // <div>Test</div>
         <Nav>
             <Bars />
             <NavMenu>
@@ -29,7 +30,7 @@ export const LoggedInBar = () => {
             <NavBtnLink to='/'>LogOut</NavBtnLink>
             </NavBtn>
         </Nav>
-        </>
+        
     );
 };
 
