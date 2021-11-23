@@ -5,20 +5,6 @@ import {Display} from '../components/Display/index';
 import { Navbar } from '../components/NavBar';
 import {LoggedInBar} from '../components/LoggedInBar';
 
-const getData = async() => {
-  await fetch('/getdata', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-        })
-  .then(res => {
-    return res;
-  })
-  .catch(err => {
-    console.error(err);
-  });
-}
 
 export const Home = (props) => {
   const today = new Date()
@@ -33,26 +19,30 @@ export const Home = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
 
-  useEffect(() => {
-    const res = getData();
-    console.log(res.status);
-    if (res.status === 200) {
+  const getData = async () => {
+    const response = await fetch('/getData',{
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
+      });
+    const jsonResponse = await response.json();
+    if (jsonResponse[0].userid != null) {
       setLoggedIn(true);
-      setUserData(res.json());
-      console.log(res.json());
+      setUserData(jsonResponse);
     } else {
-      const error = new Error(res.error);
       setLoggedIn(false);
     }
-  }, [userData, loggedIn]);
-  
 
-  
+  };
+
+  useEffect(async () => {
+    await getData();
+  }, []);
+
   return (
     <div>
       <div>
-      <Navbar/>
-      {/* {<LoggedInBar/>} */}
+      {!loggedIn &&<div><Navbar/></div> }
+      {loggedIn && <div><LoggedInBar/></div>}
       </div>
       <Search 
         setStartDate={setStartDate.bind(this)} 
