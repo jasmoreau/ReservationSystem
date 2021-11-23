@@ -18,6 +18,7 @@ export const Home = (props) => {
   const [cannotSeat, setCannotSeat] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
+  const [highTraffic, setHighTraffic] = useState(false);
 
   const getData = async () => {
     const response = await fetch('/getData',{
@@ -50,11 +51,13 @@ export const Home = (props) => {
         setData={setData.bind(this)}
         setCannotSeat={setCannotSeat.bind(this)}
         setDateT={setDateT.bind(this)}
+        setHighTraffic={setHighTraffic.bind(this)}
         showMessage={showMessage}
         data={data}
         startDate={startDate}
         cannotSeat={cannotSeat}
         dateT={dateT}
+        highTraffic={highTraffic}
       />
       <Display 
         setStartDate={setStartDate.bind(this)} 
@@ -62,11 +65,13 @@ export const Home = (props) => {
         setData={setData.bind(this)}
         setCannotSeat={setCannotSeat.bind(this)}
         setDateT={setDateT.bind(this)}
+        setHighTraffic={setHighTraffic.bind(this)}
         showMessage={showMessage}
         data={data}
         startDate={startDate}
         cannotSeat={cannotSeat}
         dateT={dateT}
+        highTraffic={highTraffic}
       />
     </div>
   );

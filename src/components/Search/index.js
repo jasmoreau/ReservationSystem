@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import dateFormat from "dateformat";
+import Holidays from "date-holidays"
 import 'react-datepicker/dist/react-datepicker.css'
 import {
     Wrapper, 
@@ -21,6 +22,23 @@ export const Search = (props) => {
         
         const date = props.startDate;
         const dateT = dateFormat(date, "yyyy-mm-dd H:MM:ss")
+
+        const hd = new Holidays('US')
+        console.log("Holiday")
+        console.log(dateT)
+        console.log(date.getDay())
+        if(hd.isHoliday(props.startDate)){
+          props.setHighTraffic(hd.isHoliday(props.startDate)[0].name)
+        }
+        else{
+          if(date.getDay() == 0)
+            props.setHighTraffic("Sunday")
+          else if (date.getDay() == 6)
+            props.setHighTraffic("Saturday")
+          else
+            props.setHighTraffic(false)
+        }
+
         const response = await fetch('/api/search',{
           method: "POST",
           headers: { "Content-Type": "application/json" },

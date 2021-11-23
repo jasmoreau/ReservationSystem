@@ -53,7 +53,8 @@ export const ReservationBox = (props) => {
         getData()
     }
 
-    const submit = () => {
+    const submit = (event) => {
+        event.preventDefault()
         const idArr = id.split(" + ")
         console.log(idArr)
     }
@@ -64,37 +65,32 @@ export const ReservationBox = (props) => {
             <hr/>
             <p>{id}</p>
             <p>{dateT}</p>
-            <form>
+            <form onSubmit={submit}>
                 <label>
                 Email:
                 <input type="text" value={userEmail} onChange={async (event) => {setUserEmail(event.target.value)}} />
                 </label>
-            </form>
-            <form>
+                <br />
                 <label>
                 First Name:
-                <input type="text" value={userFirstName} onChange={async (event) => {setUserFirstName(event.target.value)}} />
+                <input type="text" value={userFirstName} onChange={async (event) => {setUserFirstName(event.target.value)}} required/>
                 </label>
-            </form>
-            <form>
+                <br />
                 <label>
                 Last Name:
                 <input type="text" value={userLastName} onChange={async (event) => {setUserLastName(event.target.value)}} />
                 </label>
-            </form>
-            <form>
+                <br />
                 <label>
                 Billing Address:
                 <input type="text" value={userBillingAddr} onChange={async (event) => {setUserBillingAddr(event.target.value)}} />
                 </label>
-            </form>
-            <form>
+                <br />
                 <label>
                 Mailing Address:
                 <input type="text" value={userMailingAddr} onChange={async (event) => {setUserMailingAddr(event.target.value)}} />
                 </label>
-            </form>
-            <form>
+                <br />
                 <label>
                 Preferred Payment Method:
                 <div>
@@ -106,9 +102,10 @@ export const ReservationBox = (props) => {
                     <input type="radio" value="Check" checked={userPreferredPayment == "Check"} onChange={async (event) => {setUserPreferredPayment(event.target.value)}}/>
                 </div>
                 </label>
+                <br />
+                <button onClick={reset}>Reset</button>
+                <button type="submit">Submit</button>
             </form>
-            <button onClick={reset}>Reset</button>
-            <button onClick={submit}>Submit</button>
         </div>
     )
 }
