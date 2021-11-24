@@ -3,22 +3,15 @@ import { Container } from './ReservationBoxElements';
 
 
 export const ReservationBox = (props) => {
-    const [userEmail, setUserEmail] = useState()
-    const [userFirstName, setUserFirstName] = useState()
-    const [userLastName, setUserLastName] = useState()
-    const [phoneNumber, setPhoneNumber] = useState()
+    const [userEmail, setUserEmail] = useState(props.userData[0].email)
+    const [userFirstName, setUserFirstName] = useState(props.userData[0].first_name)
+    const [userLastName, setUserLastName] = useState(props.userData[0].last_name)
+    const [phoneNumber, setPhoneNumber] = useState(props.userData[0].phone)
     
     setUserEmail.bind(this)
     setUserFirstName.bind(this)
     setUserLastName.bind(this)
     setPhoneNumber.bind(this)
-
-    useEffect(() => {
-        setUserEmail(props.userData[0].email)
-        setUserFirstName(props.userData[0].first_name)
-        setUserLastName(props.userData[0].last_name)
-        setPhoneNumber(props.userData[0].phone)
-    }, [])
 
     return(
         <Container>
