@@ -13,22 +13,15 @@ export const BasicTable = (props) => {
 
     const [confirmReserve, setConfirmReserve] = useState(false);
     const [id, setId] = useState();
-    const [max_size, setMaxSize] = useState(0);
+    const [max_size, setMaxSize] = useState("");
 
     props.data.sort((a, b) => a.max_size > b.max_size ? 1 : -1);
     
     const navigate = useNavigate();
     const reservePage = (event) => {
-        console.log(event)
-        event.preventDefault();
-        const {id} = event.target;
-        const {size} = event.target;
-        setId(id);
-        setMaxSize(size);
-        console.log(id);
-        console.log(size);
+        setId(event.id);
+        setMaxSize(event.max_size);;
         setConfirmReserve(true);
-        
     }
 
     return(
@@ -44,7 +37,7 @@ export const BasicTable = (props) => {
                     <Item >
                         Size: {item.max_size}
                     </Item>
-                    <Button key={i} id={item.id} size={item.max_size} onClick={reservePage}>
+                    <Button key={i} id={item.id} max_size={item.max_size} onClick={(event) => {event.preventDefault(); reservePage({id:item.id, max_size:item.max_size})}}>
                         Reserve
                     </Button>
                     </Wrap>
