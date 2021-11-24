@@ -26,14 +26,16 @@ export const Home = (props) => {
         headers: { "Content-Type": "application/json" }
       });
     const jsonResponse = await response.json();
-    console.log(jsonResponse)
-    if (jsonResponse.length != 0 ) {
+    const jsonResponse2 = [JSON.parse(JSON.stringify(jsonResponse[0], function(key, value) {if(value === null)  return ''; return value;}))]
       if(jsonResponse[0].userid != null)
       {  setLoggedIn(true);
-        setUserData([JSON.parse(JSON.stringify(jsonResponse[0], function(key, value) {if(value === null)  return ''; return value;}))]);}
-    } else {
-      setLoggedIn(false);
-    }
+        setUserData(jsonResponse2);
+        console.log(jsonResponse2)}
+      else {
+        setLoggedIn(false);
+        setUserData(jsonResponse2);
+        console.log(userData)
+      }
 
   };
 

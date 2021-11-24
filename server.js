@@ -182,24 +182,28 @@ app.post('/updateData', withAuth, async(req, res) => {
 });
 
 
-// app.post('/getdata', withAuth, async(req, res) => {
-//   try{
-//     const email = ""
-//     if(req.email)
-//       email = req.email
-//     if(email.length > 0){
-//       const userData = await pool.query(`SELECT * FROM customer WHERE email LIKE'`+req.email+`' LIMIT 1;`)
-//       res.json(userData.rows)
-//     }
-//     else{
-//       res.json(`{"userid": null,"email": null,"first_name": null,"last_name": null,"mailing_addr": null,"billing_addr": null,"points": null,"preferred_payment": null}`)
-//     }
-//     res.json("BALLS")
-//   }
-//   catch(err){
-//     console.log(err.message)
-//   }
-// })
+app.post('/makeReservation', async(req, res) => {
+  try{
+    var query = `INSERT INTO reservations (datetime, tableid, name, phone, email, paid`
+    if(req.body.dinerid !="")
+      query += `, dinerid)`
+    else
+      query += `)`
+
+    query += ` VALUES ('`+req.body.datetime+`', `+req.body.tableid+`, '`+req.body.name+`', `+req.body.phone+`, '`+req.body.email+`', '`+req.body.paid+`'`;
+    
+    if(req.body.dinerid != "")
+      query += `, `+req.body.dinerid+`);`
+    else
+      query += `);`
+    console.log(query)
+    const userData = await pool.query(query)
+    res.json(userData.rows)
+  }
+  catch(err){
+    console.log(err.message)
+  }
+})
 
 
 app.post('/api/reserve', async(req, res) => {

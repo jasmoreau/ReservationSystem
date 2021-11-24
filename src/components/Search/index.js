@@ -24,9 +24,6 @@ export const Search = (props) => {
         const dateT = dateFormat(date, "yyyy-mm-dd H:MM:ss")
 
         const hd = new Holidays('US')
-        console.log("Holiday")
-        console.log(dateT)
-        console.log(date.getDay())
         if(hd.isHoliday(props.startDate)){
           props.setHighTraffic(hd.isHoliday(props.startDate)[0].name)
         }
@@ -61,7 +58,6 @@ export const Search = (props) => {
         jsonResponse.sort(function(a,b){
           return a.max_size > b.max_size ? 1 : -1
         })
-
         var combination = []
         var remaining = value;
         var new_max = 0;
@@ -84,8 +80,13 @@ export const Search = (props) => {
             }
     
             if(i == -1) break
-    
-            if(remaining >= jsonResponse[i].max_size || remaining+1 >= jsonResponse[i].max_size){
+            
+            if(i == 0 && jsonResponse[i].max_size >= remaining){
+              combination.push(jsonResponse[i].id)
+              remaining -= jsonResponse[i].max_size
+              new_max += jsonResponse[i].max_size
+            }
+            else if(i != 0 && (remaining >= jsonResponse[i].max_size || remaining > jsonResponse[i-1].max_size)){
               combination.push(jsonResponse[i].id)
               remaining -= jsonResponse[i].max_size
               new_max += jsonResponse[i].max_size
