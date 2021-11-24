@@ -26,9 +26,11 @@ export const Home = (props) => {
         headers: { "Content-Type": "application/json" }
       });
     const jsonResponse = await response.json();
-    if (jsonResponse[0].userid != null) {
-      setLoggedIn(true);
-      setUserData(jsonResponse);
+    console.log(jsonResponse)
+    if (jsonResponse.length != 0 ) {
+      if(jsonResponse[0].userid != null)
+      {  setLoggedIn(true);
+        setUserData(jsonResponse);}
     } else {
       setLoggedIn(false);
     }

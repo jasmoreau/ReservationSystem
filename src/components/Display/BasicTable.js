@@ -21,8 +21,7 @@ export const BasicTable = (props) => {
     const reservePage = (event) => {
         console.log(event)
         event.preventDefault();
-        const {id} = event.target;
-        const {size} = event.target;
+        const {id, size} = event.target;
         setId(id);
         setMaxSize(size);
         console.log(id);

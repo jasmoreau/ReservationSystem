@@ -1,15 +1,16 @@
 import React, {useState, useEffect } from 'react';
 
 export const AboutMeBox = (props) => {
-    const [userData, setUserData] = useState('')
-    const [userEmail, setUserEmail] = useState('')
-    const [userBillingAddr, setUserBillingAddr] = useState('')
-    const [userMailingAddr, setUserMailingAddr] = useState('')
-    const [userFirstName, setUserFirstName] = useState('')
-    const [userLastName, setUserLastName] = useState('')
-    const [userPoints, setPoints] = useState('')
-    const [userPreferredPayment, setUserPreferredPayment] = useState('')
-    const [userId, setUserId] = useState('')
+    const [userData, setUserData] = useState()
+    const [userEmail, setUserEmail] = useState()
+    const [userBillingAddr, setUserBillingAddr] = useState()
+    const [userMailingAddr, setUserMailingAddr] = useState()
+    const [userFirstName, setUserFirstName] = useState()
+    const [userLastName, setUserLastName] = useState()
+    const [userPoints, setPoints] = useState()
+    const [userPreferredPayment, setUserPreferredPayment] = useState()
+    const [userId, setUserId] = useState()
+    const [phoneNumber, setPhoneNumber] = useState()
     
     setUserData.bind(this)
     setUserEmail.bind(this)
@@ -35,6 +36,7 @@ export const AboutMeBox = (props) => {
         setPoints(jsonResponse.points)
         setUserPreferredPayment(jsonResponse.preferred_payment)
         setUserId(jsonResponse.userid)
+        setPhoneNumber(jsonResponse.phone)
     }
 
     const getData = async () => {
@@ -60,7 +62,8 @@ export const AboutMeBox = (props) => {
             mailing_addr: userMailingAddr,
             billing_addr: userBillingAddr,
             points: userPoints,
-            preferred_payment: userPreferredPayment
+            preferred_payment: userPreferredPayment,
+            phone: phoneNumber
         }
     }
 
@@ -120,7 +123,11 @@ export const AboutMeBox = (props) => {
                 <input type="text" value={userMailingAddr} onChange={async (event) => {setUserMailingAddr(event.target.value)}} />
                 </label>
                 <br />
-               
+                <label>
+                Phone Number:
+                <input type="text" value={phoneNumber} onChange={async (event) => {setPhoneNumber(event.target.value)}} />
+                </label>
+                <br />
                 <label>
                 Points:
                 <input type="text" value={userPoints}  onChange={async (event) => {setPoints(event.target.value)}} />

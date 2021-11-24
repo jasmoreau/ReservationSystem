@@ -149,7 +149,7 @@ app.post('/getdata', async(req, res) => {
     }
 
     if(!user)
-      res.json([{'userid': null,'email': null,'first_name': null,"last_name": null,"mailing_addr": null,"billing_addr": null,"points": null,"preferred_payment": null}])
+      res.json([{'userid': null,'email': null,'first_name': null,"last_name": null,"mailing_addr": null,"billing_addr": null,"points": null,"preferred_payment": null, "phone": null}])
     else{
       const userData = await pool.query(`SELECT * FROM customer WHERE email LIKE '`+req.email+`' LIMIT 1;`)
       console.log(userData.rows)
@@ -172,7 +172,8 @@ app.post('/updateData', withAuth, async(req, res) => {
             mailing_addr,
             billing_addr,
             points,
-            preferred_payment} = req.body;
+            preferred_payment,
+            phone} = req.body;
 
     
   }catch(err){
