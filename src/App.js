@@ -4,7 +4,6 @@ import withAuth from './pages/withAuth';
 import {Home} from './pages/Home';
 import {Login} from './pages/Login';
 import {Register} from './pages/Register';
-import {Reservation} from './pages/Reservation';
 import {PageNotFound} from './pages/PageNotFound';
 import {AboutMe} from './pages/AboutMe';
 class App extends Component {
@@ -17,7 +16,6 @@ class App extends Component {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/aboutme" element={<AboutMe/>} />
-          <Route path="/reserve/:id+:dateT" element={<Reservation/>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>

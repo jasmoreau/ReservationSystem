@@ -161,7 +161,25 @@ app.post('/getdata', async(req, res) => {
 catch(err){
   console.log(err.message);
 }
-})
+});
+
+app.post('/updateData', withAuth, async(req, res) => {
+  try{
+    const {userid,
+            email,
+            first_name,
+            last_name,
+            mailing_addr,
+            billing_addr,
+            points,
+            preferred_payment} = req.body;
+
+    
+  }catch(err){
+    console.log(err.message)
+  }
+});
+
 
 // app.post('/getdata', withAuth, async(req, res) => {
 //   try{
@@ -191,5 +209,7 @@ app.post('/api/reserve', async(req, res) => {
     console.log(err.message);
   }
 })
+
+
 
 app.listen(process.env.PORT || 8080);

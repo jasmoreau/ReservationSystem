@@ -1,4 +1,15 @@
 import styled from 'styled-components';
+import { ReservationBox } from '../ReservationBox';
+
+export const ReservationBoxx = styled(ReservationBox)`
+  display: block;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+`;
+
 
 export const Container = styled.div`
     display: flex;
