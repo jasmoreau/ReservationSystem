@@ -26,7 +26,7 @@ export const BasicTable = (props) => {
 
     return(
         <>
-        {confirmReserve && <ReservationBox id={id} max_size={max_size} date={props.dateT} cancel={setConfirmReserve.bind(this)}/>}
+        {confirmReserve && <ReservationBox id={id} max_size={max_size} date={props.dateT} userData={props.userData} cancel={setConfirmReserve.bind(this)}/>}
         <Container>
             {   
                 props.data.map((item, i) => 

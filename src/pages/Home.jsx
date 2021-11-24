@@ -74,6 +74,7 @@ export const Home = (props) => {
         cannotSeat={cannotSeat}
         dateT={dateT}
         highTraffic={highTraffic}
+        userData={userData}
       />
     </div>
   );

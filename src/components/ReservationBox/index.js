@@ -13,6 +13,14 @@ export const ReservationBox = (props) => {
     setUserLastName.bind(this)
     setPhoneNumber.bind(this)
 
+    useEffect(() => {
+        const data = JSON.parse(JSON.stringify(props.userData[0], function(key, value) {if(value === null)  return ''; return value;}))
+        setUserEmail(data.email)
+        setUserFirstName(data.first_name)
+        setUserLastName(data.last_name)
+        setPhoneNumber(data.phone)
+    }, [])
+
     return(
         <Container>
             <label>Confirm Reservation</label>
