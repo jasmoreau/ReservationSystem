@@ -30,7 +30,7 @@ export const Home = (props) => {
     if (jsonResponse.length != 0 ) {
       if(jsonResponse[0].userid != null)
       {  setLoggedIn(true);
-        setUserData(jsonResponse);}
+        setUserData([JSON.parse(JSON.stringify(jsonResponse[0], function(key, value) {if(value === null)  return ''; return value;}))]);}
     } else {
       setLoggedIn(false);
     }
