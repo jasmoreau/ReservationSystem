@@ -9,6 +9,8 @@ const config = {
     elephantPassword: process.env.ELEPHANT_PASSWORD,
     elephantDatabase: process.env.ELEPHANT_DATABASE,
     elephantPort: process.env.ELEPHANT_PORT,
+
+    stripeKey: process.env.STRIPE_KEY
 };
 
 module.exports = config;

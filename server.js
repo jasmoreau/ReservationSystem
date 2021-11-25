@@ -8,6 +8,7 @@ const User = require('./models/User');
 const withAuth = require('./middleware');
 const pool = require('./creds.js');
 const { application } = require('express');
+const config = require('./config');
 const app = express();
 
 const secret = 'mysecretsshhh';
@@ -206,15 +207,13 @@ app.post('/makeReservation', async(req, res) => {
 })
 
 
-app.post('/api/reserve', async(req, res) => {
+app.get('/api/getKey', async(req, res) => {
   try{
-    //TODO
+    res.json({clientSecret: config.stripeKey});
   }
   catch(err){
     console.log(err.message);
   }
 })
-
-
 
 app.listen(process.env.PORT || 8080);

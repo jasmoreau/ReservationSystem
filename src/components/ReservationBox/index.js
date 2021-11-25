@@ -2,12 +2,16 @@ import React, {useState, useEffect } from 'react';
 import { Container } from './ReservationBoxElements';
 import { NavBtn, NavBtnLink } from '../../../src/components/NavBar/NavBarElements'
 
+import {useNavigate} from 'react-router-dom';
+
+
 export const ReservationBox = (props) => {
     const [userEmail, setUserEmail] = useState(props.userData[0].email)
     const [userFirstName, setUserFirstName] = useState(props.userData[0].first_name)
     const [userLastName, setUserLastName] = useState(props.userData[0].last_name)
     const [phoneNumber, setPhoneNumber] = useState(props.userData[0].phone)
-    
+    const navigate = useNavigate();
+
     setUserEmail.bind(this)
     setUserFirstName.bind(this)
     setUserLastName.bind(this)
@@ -26,6 +30,10 @@ export const ReservationBox = (props) => {
                 body: JSON.stringify(resData)
               });
         }
+    }
+
+    const sendToStripe = async(event) => {
+        navigate('/checkout');
     }
 
     return(
@@ -64,13 +72,13 @@ export const ReservationBox = (props) => {
             <br />
             <label>{props.date}</label>
             <button onClick={()=>props.cancel(false)}>Cancel</button>
-            <button type="submit">Submit</button>
+            <button onClick={()=>sendToStripe()} type="submit">Submit</button>
             {props.userData[0].email == "" && 
-                (<p>You might want to
+                (<div>You might want to
                 <NavBtn>
                 <NavBtnLink to='/register'>Register</NavBtnLink>
                 </NavBtn>
-                &nbsp; &nbsp; &nbsp;to earn points and pre-fill your information!</p>)}
+                &nbsp; &nbsp; &nbsp;to earn points and pre-fill your information!</div>)}
                 
             {props.highTraffic && <p><b>You will be required to enter valid payment details to make this reservation as this is a high traffic day / holiday ({props.highTraffic}) which has a $10 no show fee!</b></p>}
             </form>
