@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import { Container } from './ReservationBoxElements';
-
+import { NavBtn, NavBtnLink } from '../../../src/components/NavBar/NavBarElements'
 
 export const ReservationBox = (props) => {
     const [userEmail, setUserEmail] = useState(props.userData[0].email)
@@ -33,22 +33,24 @@ export const ReservationBox = (props) => {
             <label>Confirm Reservation</label>
             <br />
             <form onSubmit={(event) => createReservation(event)}>
-            <label>
-            First Name:
-            <input type="text" value={userFirstName} onChange={async (event) => {setUserFirstName(event.target.value)}} required />
-            </label>
-            <label>
-            Last Name:
-            <input type="text" value={userLastName} onChange={async (event) => {setUserLastName(event.target.value)}} required />
-            </label>
-            <label>
-            Phone:
-            <input type="text" value={phoneNumber} onChange={async (event) => {setPhoneNumber(event.target.value)}} required />
-            </label>
-            <label>
-            Email:
-            <input type="text" value={userEmail} onChange={async (event) => {setUserEmail(event.target.value)}} required />
-            </label>
+            <div>
+                <label>
+                First Name:
+                <input type="text" value={userFirstName} onChange={async (event) => {setUserFirstName(event.target.value)}} required />
+                </label>
+                <label>
+                Last Name:
+                <input type="text" value={userLastName} onChange={async (event) => {setUserLastName(event.target.value)}} required />
+                </label>
+                <label>
+                Phone:
+                <input type="text" value={phoneNumber} onChange={async (event) => {setPhoneNumber(event.target.value)}} required />
+                </label>
+                <label>
+                Email:
+                <input type="text" value={userEmail} onChange={async (event) => {setUserEmail(event.target.value)}} required />
+                </label>
+            </div>
             <br/>
             <label>Table Number: </label>
             <br/>
@@ -63,6 +65,13 @@ export const ReservationBox = (props) => {
             <label>{props.date}</label>
             <button onClick={()=>props.cancel(false)}>Cancel</button>
             <button type="submit">Submit</button>
+            {props.userData[0].email == "" && 
+                <NavBtn>
+                <p>You might want to </p>
+                <NavBtnLink to='/register'>Register</NavBtnLink>
+                <p>&nbsp; &nbsp; &nbsp;to earn points and pre-fill your information!</p>
+                </NavBtn>}
+            {props.highTraffic && <p><b>You will be required to enter valid payment details to make this reservation as this is a high traffic day / holiday ({props.highTraffic}) which has a $10 no show fee!</b></p>}
             </form>
         </Container>
     )
