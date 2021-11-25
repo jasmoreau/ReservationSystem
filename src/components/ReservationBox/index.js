@@ -66,11 +66,12 @@ export const ReservationBox = (props) => {
             <button onClick={()=>props.cancel(false)}>Cancel</button>
             <button type="submit">Submit</button>
             {props.userData[0].email == "" && 
+                (<p>You might want to
                 <NavBtn>
-                <p>You might want to </p>
                 <NavBtnLink to='/register'>Register</NavBtnLink>
-                <p>&nbsp; &nbsp; &nbsp;to earn points and pre-fill your information!</p>
-                </NavBtn>}
+                </NavBtn>
+                &nbsp; &nbsp; &nbsp;to earn points and pre-fill your information!</p>)}
+                
             {props.highTraffic && <p><b>You will be required to enter valid payment details to make this reservation as this is a high traffic day / holiday ({props.highTraffic}) which has a $10 no show fee!</b></p>}
             </form>
         </Container>
