@@ -10,6 +10,7 @@ const pool = require('./creds.js');
 const { application } = require('express');
 const config = require('./config');
 const app = express();
+  const stripe = require("stripe")(process.env.STRIPE_KEY)
 
 const secret = 'mysecretsshhh';
 
@@ -209,7 +210,12 @@ app.post('/makeReservation', async(req, res) => {
 
 app.get('/api/getKey', async(req, res) => {
   try{
-    res.json({clientSecret: config.stripeKey});
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: 1200, // Specify amount here
+      currency: "usd" // Specify currency here
+    });
+
+    res.json({clientSecret: paymentIntent.client_secret});
   }
   catch(err){
     console.log(err.message);

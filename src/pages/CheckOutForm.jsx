@@ -3,7 +3,7 @@ import {CheckOutComponent} from '../components/CheckOutComponents';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jxpk_test_51I6sYMAOWgiadKFpuesmhGeqsXOup9Y3hCVln7mb7eON2EnhuhBTzZMYzVHhu3psh0o9CCf9zgYqlCVbuPnOlevk00IaWEiKQa');
+const stripePromise = loadStripe('pk_test_51K04KaHxx5tHW0hyE7vcP9CUxRRPb0vROb666ishVGjZN6k48ZQ1kP3UDqlgW0yZZdShsrybYolFcL4BKvebmAXr00115uO3xQ');
 let opt;
 const getKey = async () => {
     const rep = await fetch('/api/getKey',{
@@ -13,7 +13,7 @@ const getKey = async () => {
     const response = await rep.json();
     
     opt = response;
-    
+    console.log(opt)
 };
 
 
@@ -21,9 +21,9 @@ const CheckOutComp = (props) => {
     
    
     const options = {
-        clientSecret: opt.clientSecret.toString(),
+        clientSecret: opt.clientSecret,
     };
-
+    console.log(opt.clientSecret)
     return(
         <Elements stripe={stripePromise} options={options}>
         <CheckOutComponent />
