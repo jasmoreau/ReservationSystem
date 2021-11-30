@@ -19,6 +19,7 @@ export const Home = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const [highTraffic, setHighTraffic] = useState(false);
+  const [reservationPlaced, setReservationPlaced] = useState(false);
 
   const getData = async () => {
     const response = await fetch('/getData',{
@@ -70,6 +71,7 @@ export const Home = (props) => {
         setCannotSeat={setCannotSeat.bind(this)}
         setDateT={setDateT.bind(this)}
         setHighTraffic={setHighTraffic.bind(this)}
+        setReservationPlaced={setReservationPlaced.bind(this)}
         showMessage={showMessage}
         data={data}
         startDate={startDate}
@@ -77,6 +79,7 @@ export const Home = (props) => {
         dateT={dateT}
         highTraffic={highTraffic}
         userData={userData}
+        reservationPlaced={reservationPlaced}
       />
     </div>
   );

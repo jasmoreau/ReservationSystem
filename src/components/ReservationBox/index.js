@@ -17,8 +17,14 @@ export const ReservationBox = (props) => {
     setUserLastName.bind(this)
     setPhoneNumber.bind(this)
 
-    const createReservation = async(event) => {
-        event.preventDefault();
+    function timeout(delay) {
+        return new Promise( res => setTimeout(res, delay) );
+    }
+    
+
+    const createReservation = async(e) => {
+        e.preventDefault()
+        props.setReservationPlaced(true)
         const tables = props.id.toString().split(" + ")
         if(props.highTraffic) var paying = true; else var paying = false;
         for (const element of tables){
@@ -30,10 +36,16 @@ export const ReservationBox = (props) => {
                 body: JSON.stringify(resData)
               });
         }
+        await timeout(5000)
+        window.location.reload()
     }
 
     const sendToStripe = async(event) => {
         navigate('/checkout');
+    }
+
+    const test = () => {
+        props.setReservationPlaced(true)
     }
 
     return(
@@ -52,7 +64,7 @@ export const ReservationBox = (props) => {
                 </label>
                 <label>
                 Phone:
-                <input type="text" value={phoneNumber} onChange={async (event) => {setPhoneNumber(event.target.value)}} required />
+                <input type="number" value={phoneNumber} onChange={async (event) => {setPhoneNumber(event.target.value)}} required />
                 </label>
                 <label>
                 Email:
@@ -71,8 +83,10 @@ export const ReservationBox = (props) => {
             <label>Date: </label>
             <br />
             <label>{props.date}</label>
-            <button onClick={()=>props.cancel(false)}>Cancel</button>
-            <button onClick={()=>sendToStripe()} type="submit">Submit</button>
+            {!props.reservationPlaced && <button onClick={()=>props.cancel(false)}>Cancel</button>}
+            {!props.reservationPlaced && props.highTraffic && <button onClick={()=>sendToStripe()} type="submit">Submit</button>}
+            {!props.reservationPlaced && !props.highTraffic && <button type="submit">Submit</button>}
+            {props.reservationPlaced && <p>Reservation has successfully been placed!</p>}
             {props.userData[0].email == "" && 
                 (<div>You might want to
                 <NavBtn>

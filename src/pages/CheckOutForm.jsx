@@ -42,7 +42,7 @@ export const CheckOutForm = (props) => {
 
     return (
         <>
-        {load && (<CheckOutComp/>)}
+        {load && props.highTraffic && (<CheckOutComp/>)}
         </>
     );
 };
