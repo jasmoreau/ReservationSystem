@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import dateFormat from "dateformat";
 import Holidays from "date-holidays"
+import setHours from "date-fns/setHours";
+import setMinutes from "date-fns/setMinutes";
 import 'react-datepicker/dist/react-datepicker.css'
 import {
     Wrapper, 
@@ -134,7 +136,30 @@ export const Search = (props) => {
             selected={props.startDate} 
             onChange={(date) => props.setStartDate(date)}
             showTimeSelect 
-            dateFormat="MMMM d, yyyy h:mm aa"/>
+            dateFormat="MMMM d, yyyy h:mm aa"
+            excludeTimes={[
+              setHours(setMinutes(new Date(), 0), 0),
+              setHours(setMinutes(new Date(), 30), 0),
+              setHours(setMinutes(new Date(), 0), 1),
+              setHours(setMinutes(new Date(), 30), 1),
+              setHours(setMinutes(new Date(), 0), 2),
+              setHours(setMinutes(new Date(), 30), 2),
+              setHours(setMinutes(new Date(), 0), 3),
+              setHours(setMinutes(new Date(), 30), 3),
+              setHours(setMinutes(new Date(), 0), 4),
+              setHours(setMinutes(new Date(), 30), 4),
+              setHours(setMinutes(new Date(), 0), 5),
+              setHours(setMinutes(new Date(), 30), 5),
+              setHours(setMinutes(new Date(), 0), 6),
+              setHours(setMinutes(new Date(), 30), 6),
+              setHours(setMinutes(new Date(), 0), 7),
+              setHours(setMinutes(new Date(), 30), 7),
+              setHours(setMinutes(new Date(), 0), 8),
+              setHours(setMinutes(new Date(), 30), 8),
+              setHours(setMinutes(new Date(), 0), 9),
+              setHours(setMinutes(new Date(), 30), 9),
+              setHours(setMinutes(new Date(), 30), 23),
+            ]}/>
             <Form>
             <NumericInp format={myFormat} min={1} value={numPeople} onChange={ async (value) => {await generate(value)}}/>
             </Form>
