@@ -57,6 +57,17 @@ app.post('/api/register', function(req, res) {
   });
 });
 
+app.post("/logout", function(req, res) {
+  try{
+  console.log("here")
+  res.clearCookie('token')
+  res.json("HERE")
+}
+catch(e){
+  console.log(e)
+}
+ });
+
 app.post('/api/authenticate', function(req, res) {
   const { email, password } = req.body;
   User.findOne({ email }, function(err, user) {
