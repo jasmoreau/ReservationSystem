@@ -4,6 +4,7 @@ import {Search} from '../components/Search/index';
 import {Display} from '../components/Display/index';
 import { Navbar } from '../components/NavBar';
 import {LoggedInBar} from '../components/LoggedInBar';
+import {Combinations} from '../components/Combinations'
 
 
 export const Home = (props) => {
@@ -11,9 +12,14 @@ export const Home = (props) => {
   today.setHours(12,0,0);
   today.setDate(today.getDate() + 1)
   
+  const tomorrow = new Date()
+  tomorrow.setDate(today.getDate()+1)
+
   const [showMessage, setShowMessage] = useState(false);
   const [data, setData] = useState('');
   const [startDate, setStartDate] = useState(today);
+  const [startDate2, setStartDate2] = useState(today);
+  const [endDate2, setEndDate2] = useState(tomorrow);
   const [dateT, setDateT] = useState('');
   const [cannotSeat, setCannotSeat] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -81,6 +87,12 @@ export const Home = (props) => {
         userData={userData}
         reservationPlaced={reservationPlaced}
       />
+    <Combinations
+      setStartDate2={setStartDate2.bind(this)}
+      setEndDate2={setEndDate2.bind(this)}
+      startDate2={startDate2}
+      endDate2={endDate2}
+    />
     </div>
   );
   

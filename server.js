@@ -218,6 +218,30 @@ app.post('/makeReservation', async(req, res) => {
   }
 })
 
+app.post('/addcombination', async(req, res) => {
+  try{
+    const userData = await pool.query(`
+    INSERT INTO combinations VALUES ('`+req.body.tables+`', '`+req.body.datetime+`')
+    `)
+    res.json(userData.rows)
+  }
+  catch(err){
+    console.log(err.message)
+  }
+})
+
+app.post('/getcombination', async(req, res) => {
+  try{
+    const userData = await pool.query(`
+    SELECT * FROM combinations WHERE datetime>='`+req.body.startDate+`' AND datetime<='`+req.body.endDate+`';
+    `)
+    res.json(userData.rows)
+  }
+  catch(err){
+    console.log(err.message)
+  }
+})
+
 
 app.get('/api/getKey', async(req, res) => {
   try{

@@ -36,6 +36,14 @@ export const ReservationBox = (props) => {
                 body: JSON.stringify(resData)
               });
         }
+
+        if(tables.length > 1){
+            const response = await fetch('/addcombination',{
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({tables:props.id, datetime:props.date})
+              });
+        }
         await timeout(5000)
         window.location.reload()
     }
