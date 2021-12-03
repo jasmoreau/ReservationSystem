@@ -10,8 +10,10 @@ export const Combinations = (props) => {
     const [reservationsExist, setReservationsExist] = useState(false);
 
     const getCombinations = async () => {
-        const startDate = dateFormat(props.startDate2, "yyyy-mm-dd")
-        const endDate = dateFormat(props.endDate2, "yyyy-mm-dd")
+        var startDate = dateFormat(props.startDate2, "yyyy-mm-dd h:MM:ss")
+        var endDate = dateFormat(props.endDate2, "yyyy-mm-dd h:MM:ss")
+        startDate = startDate.substring(0, 10) + " 00:00:00"
+        endDate = startDate.substring(0, 10) + " 23:59:59"
         console.log(startDate)
         console.log(endDate)
         const response = await fetch('/getcombination',{

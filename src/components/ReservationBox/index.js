@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react';
-import { Container, FlexBox, Text, TextTitle, FlexWrap, Button, SubmitButton, FlexRegister, RegisterButton } from './ReservationBoxElements';
+import { Container, FlexBox, Text, TextTitle, FlexWrap, Button, SubmitButton, FlexRegister, RegisterButton, Input } from './ReservationBoxElements';
 import { NavBtn, NavBtnLink } from '../NavBar/NavBarElements'
 import { Payment } from '../Payment';
 import {Link, useNavigate} from 'react-router-dom';
@@ -114,20 +114,20 @@ export const ReservationBox = (props) => {
          
             <FlexBox>
                 <Text>
-                First Name:
-                <input type="text" value={userFirstName} onChange={async (event) => {setUserFirstName(event.target.value)}} required />
+                First Name: 
+                <Input type="text" value={userFirstName} onChange={async (event) => {setUserFirstName(event.target.value)}} required />
                 </Text>
                 <Text>
-                Last Name:
-                <input type="text" value={userLastName} onChange={async (event) => {setUserLastName(event.target.value)}} required />
+                Last Name: 
+                <Input type="text" value={userLastName} onChange={async (event) => {setUserLastName(event.target.value)}} required />
                 </Text>
                 <Text>
-                Phone:
-                <input type="number" value={phoneNumber} onChange={async (event) => {setPhoneNumber(event.target.value)}} required />
+                Phone: 
+                <Input type="number" value={phoneNumber} onChange={async (event) => {setPhoneNumber(event.target.value)}} required />
                 </Text>
                 <Text>
-                Email:
-                <input type="text" value={userEmail} onChange={async (event) => {setUserEmail(event.target.value)}} required />
+                Email: 
+                <Input type="text" value={userEmail} onChange={async (event) => {setUserEmail(event.target.value)}} required />
                 </Text>
             </FlexBox>
             

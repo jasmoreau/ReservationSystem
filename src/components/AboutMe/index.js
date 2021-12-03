@@ -1,4 +1,6 @@
 import React, {useState, useEffect } from 'react';
+import {  Text, TextTitle } from '../ReservationBox/ReservationBoxElements';
+import {RegisterButton, SubmitButton, Body, Button, Container, FlexBox, FlexButton, FlexTitle, Form, Input, Label } from './AboutMeStyle';
 
 export const AboutMeBox = (props) => {
     const [userData, setUserData] = useState()
@@ -92,48 +94,51 @@ export const AboutMeBox = (props) => {
 
     return (
         <>
-        <div>
-            <h1> About Me </h1>
-            <label>
+        <FlexBox>
+            <Container>
+            <FlexTitle>
+            <TextTitle> About Me </TextTitle>
+            </FlexTitle>
+            <Label>
                 Diner Number: {userId}
-            </label>
-            <form onSubmit={submit}>
-                <label>
+            </Label>
+            <Form onSubmit={submit}>
+                <Label>
                 Email:
-                <input type="text" value={userEmail} onChange={async (event) => {setUserEmail(event.target.value)}} readonly />
-                </label>
+                </Label>
+                <Input type="text" value={userEmail} onChange={async (event) => {setUserEmail(event.target.value)}} readonly />
                 <br />
-                <label>
+                <Label>
                 First Name:
-                <input type="text" value={userFirstName} onChange={async (event) => {setUserFirstName(event.target.value)}}/>
-                </label>
+                <Input type="text" value={userFirstName} onChange={async (event) => {setUserFirstName(event.target.value)}}/>
+                </Label>
                 <br />
-                <label>
+                <Label>
                 Last Name:
-                <input type="text" value={userLastName} onChange={async (event) => {setUserLastName(event.target.value)}} />
-                </label>
+                <Input type="text" value={userLastName} onChange={async (event) => {setUserLastName(event.target.value)}} />
+                </Label>
                 <br />
-                <label>
+                <Label>
                 Billing Address:
-                <input type="text" value={userBillingAddr} onChange={async (event) => {setUserBillingAddr(event.target.value)}} />
-                </label>
+                <Input type="text" value={userBillingAddr} onChange={async (event) => {setUserBillingAddr(event.target.value)}} />
+                </Label>
                 <br />
-                <label>
+                <Label>
                 Mailing Address:
-                <input type="text" value={userMailingAddr} onChange={async (event) => {setUserMailingAddr(event.target.value)}} />
-                </label>
+                <Input type="text" value={userMailingAddr} onChange={async (event) => {setUserMailingAddr(event.target.value)}} />
+                </Label>
                 <br />
-                <label>
+                <Label>
                 Phone Number:
-                <input type="number" value={phoneNumber} onChange={async (event) => {setPhoneNumber(event.target.value)}} />
-                </label>
+                <Input type="number" value={phoneNumber} onChange={async (event) => {setPhoneNumber(event.target.value)}} />
+                </Label>
                 <br />
-                <label>
+                <Label>
                 Points:
-                <input type="text" value={userPoints}  onChange={async (event) => {setPoints(event.target.value)}} readonly />
-                </label>
+                <Input type="text" value={userPoints}  onChange={async (event) => {setPoints(event.target.value)}} readonly />
+                </Label>
                 <br />
-                <label>
+                <Label>
                 Preferred Payment Method:
                 <div>
                     <label>Cash</label>
@@ -143,12 +148,15 @@ export const AboutMeBox = (props) => {
                     <label>Check</label>
                     <input type="radio" value="Check" checked={userPreferredPayment == "Check"} onChange={async (event) => {setUserPreferredPayment(event.target.value)}}/>
                 </div>
-                </label>
+                </Label>
                 <br />
-                <button onClick={reset}>Reset</button>
-                <button type="submit">Save Changes</button>
-            </form>
-        </div>
+                <FlexButton>
+                <RegisterButton onClick={reset}>Reset</RegisterButton>
+                <SubmitButton type="submit">Save Changes</SubmitButton>
+                </FlexButton>
+            </Form>
+            </Container>
+        </FlexBox>
         </>
     )
 

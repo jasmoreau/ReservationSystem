@@ -38,6 +38,15 @@ export const Text = styled.label`
     margin: 0.5rem;
 `
 
+export const Input = styled.input`
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #fafafa;
+    padding: 3px;
+    text-decoration: none;
+    cursor: pointer;
+`
+
 export const FlexWrap = styled.div`
 
     display: flex;
@@ -46,6 +55,7 @@ export const FlexWrap = styled.div`
 
 export const Button = styled.button`
     margin-right: 2rem;
+    font-weight: bold;
 `
 
 export const SubmitButton = styled.button`

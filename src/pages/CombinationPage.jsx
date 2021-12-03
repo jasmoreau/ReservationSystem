@@ -4,7 +4,7 @@ import { LoggedInBar } from '../components/LoggedInBar';
 
 export const CombinationPage = (props) => {
   const today = new Date()
-  today.setHours(12,0,0);
+  today.setHours(0,0,0);
   today.setDate(today.getDate() + 1)
   
   const tomorrow = new Date()
