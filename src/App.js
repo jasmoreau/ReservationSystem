@@ -9,6 +9,7 @@ import {AboutMe} from './pages/AboutMe';
 import { CheckOutForm } from './pages/CheckOutForm';
 import { LoggedOut } from './pages/LoggedOut'
 import { CombinationPage } from './pages/CombinationPage'
+import { TablesPage } from './pages/TablesPage'
 class App extends Component {
   render() {
     return (
@@ -22,6 +23,7 @@ class App extends Component {
           <Route path="/checkout" element={<CheckOutForm/>} />
           <Route path="/loggedout" element={<LoggedOut/>} />
           <Route path="/combinations" element={<CombinationPage/>} />
+          <Route path="/tables" element={<TablesPage/>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>

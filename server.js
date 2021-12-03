@@ -230,7 +230,6 @@ app.post('/checkowner', async(req, res) => {
 app.post('/addtable', async(req, res) => {
   try{
     const res = await pool.query(`INSERT INTO tables (id, max_size) VALUES (`+req.body.id+`, `+req.body.max_size+`)`)
-
   }catch(err){
     console.log(err.message)
   }
@@ -239,11 +238,20 @@ app.post('/addtable', async(req, res) => {
 app.post('/deletetable', async(req, res) => {
   try{
     const res = await pool.query(`DELETE FROM tables WHERE id = `+req.body.id+``)
-
   }catch(err){
     console.log(err.message)
   }
 });
+
+app.post('/gettables', async(req, res) => {
+  try{
+    const data = await pool.query(`SELECT * FROM tables;`)
+    res.json(data.rows)
+  }catch(err){
+    console.log(err.message)
+  }
+});
+
 
 app.post('/makeReservation', async(req, res) => {
   try{

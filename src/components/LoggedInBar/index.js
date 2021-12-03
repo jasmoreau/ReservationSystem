@@ -55,6 +55,9 @@ export const LoggedInBar = (props) => {
             {isOwner == 1 && <NavLink to='/combinations'>
                 Check All Combinations
             </NavLink>}
+            {isOwner == 1 && <NavLink to='/tables'>
+                Edit Tables
+            </NavLink>}
             <NavLink to='/aboutme'>
                 Profile
             </NavLink>
