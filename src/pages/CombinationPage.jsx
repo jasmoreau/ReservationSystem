@@ -1,5 +1,6 @@
 import {React, useState}  from 'react';
 import {Combinations} from '../components/Combinations';
+import { LoggedInBar } from '../components/LoggedInBar';
 
 export const CombinationPage = (props) => {
   const today = new Date()
@@ -13,11 +14,14 @@ export const CombinationPage = (props) => {
   const [endDate2, setEndDate2] = useState(tomorrow);
 
   return (
-    <Combinations 
-    setStartDate2={setStartDate2.bind(this)}
-    setEndDate2={setEndDate2.bind(this)}
-    startDate2={startDate2}
-    endDate2={endDate2}/>
+    <div>
+      <LoggedInBar/>
+      <Combinations 
+      setStartDate2={setStartDate2.bind(this)}
+      setEndDate2={setEndDate2.bind(this)}
+      startDate2={startDate2}
+      endDate2={endDate2}/>
+    </div>
   );
   
 }

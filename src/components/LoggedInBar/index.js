@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 import {
@@ -15,6 +15,8 @@ import LogoImg from './uh.png';
 export const LoggedInBar = (props) => {
     const navigate = useNavigate();
 
+    const [isOwner, setIsOwner] = useState(false);
+
     const logout = async () => {
         const response = await fetch('/logout',{
             method: "POST",
@@ -23,7 +25,23 @@ export const LoggedInBar = (props) => {
         console.log(response)
         navigate('/loggedout');
     }
-    
+
+    const ownerCheck = async () => {
+        const response = await fetch('/checkowner',{
+            method: "POST",
+            headers: { "Content-Type": "application/json" }
+          });
+        const jsonResponse = await response.json();
+        if(jsonResponse == 1)
+          setIsOwner(true)
+        else
+          setIsOwner(false)
+      };
+
+    useEffect(async () => {
+    await ownerCheck();
+    }, []);
+
 
     return (
         
@@ -34,7 +52,7 @@ export const LoggedInBar = (props) => {
             <NavLink to='/'>
                 <Logo  src={LogoImg}/>
             </NavLink>
-            {props.isOwner == 1 && <NavLink to='/combinations'>
+            {isOwner == 1 && <NavLink to='/combinations'>
                 Check All Combinations
             </NavLink>}
             <NavLink to='/aboutme'>

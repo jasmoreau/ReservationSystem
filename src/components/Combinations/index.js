@@ -7,6 +7,7 @@ import {BasicTable}  from './BasicTable';
 export const Combinations = (props) => {
 
     const [data, setData] = useState([]);
+    const [reservationsExist, setReservationsExist] = useState(false);
 
     const getCombinations = async () => {
         const startDate = dateFormat(props.startDate2, "yyyy-mm-dd")
@@ -20,6 +21,10 @@ export const Combinations = (props) => {
           });
         const jsonResponse = await response.json()
         setData(jsonResponse)
+        if(jsonResponse.length == 0)
+          setReservationsExist(false)
+        else
+          setReservationsExist(true)
     }
 
     const toggleButtonState = async () => {
@@ -31,6 +36,9 @@ export const Combinations = (props) => {
         }
       };
 
+    useEffect(async () => {
+      await getCombinations();
+    }, [])
 
     return (
         <>
@@ -41,7 +49,8 @@ export const Combinations = (props) => {
             dateFormat="MMMM d, yyyy"
             />
         <button onClick={toggleButtonState}>Find Combinations</button>
-        <BasicTable data={data}></BasicTable>
+        {reservationsExist && <BasicTable data={data}></BasicTable>}
+        {!reservationsExist && <p>There are no combinations needed this day!</p>}
         </div>
         </>
     )

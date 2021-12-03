@@ -25,19 +25,7 @@ export const Home = (props) => {
   const [userData, setUserData] = useState({});
   const [highTraffic, setHighTraffic] = useState(false);
   const [reservationPlaced, setReservationPlaced] = useState(false);
-  const [isOwner, setIsOwner] = useState(false);
 
-const ownerCheck = async () => {
-    const response = await fetch('/checkowner',{
-        method: "POST",
-        headers: { "Content-Type": "application/json" }
-      });
-    const jsonResponse = await response.json();
-    if(jsonResponse == 1)
-      setIsOwner(true)
-    else
-      setIsOwner(false)
-  };
 
   const getData = async () => {
     const response = await fetch('/getData',{
@@ -60,14 +48,13 @@ const ownerCheck = async () => {
 
   useEffect(async () => {
     await getData();
-    await ownerCheck();
   }, []);
 
   return (
     <div>
       <div>
       {!loggedIn &&<div><Navbar/></div> }
-      {loggedIn && <div><LoggedInBar isOwner={isOwner}/></div>}
+      {loggedIn && <div><LoggedInBar/></div>}
       </div>
       <Search 
         setStartDate={setStartDate.bind(this)} 

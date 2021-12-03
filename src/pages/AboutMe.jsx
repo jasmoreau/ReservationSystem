@@ -6,7 +6,7 @@ export const AboutMe = (props) => {
 
     return (
         <div>
-        {/* <LoggedInBar/> */}
+        <LoggedInBar/>
         
         <AboutMeBox />
         </div>
