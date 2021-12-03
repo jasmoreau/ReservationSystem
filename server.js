@@ -214,13 +214,31 @@ app.post('/checkowner', async(req, res) => {
         }
       });
     }
-    
+
     if(req.email && req.email=="owner@email.com"){
       res.json(1)
     }
     else{
       res.json(0)
     }
+
+  }catch(err){
+    console.log(err.message)
+  }
+});
+
+app.post('/addtable', async(req, res) => {
+  try{
+    const res = await pool.query(`INSERT INTO tables (id, max_size) VALUES (`+req.body.id+`, `+req.body.max_size+`)`)
+
+  }catch(err){
+    console.log(err.message)
+  }
+});
+
+app.post('/deletetable', async(req, res) => {
+  try{
+    const res = await pool.query(`DELETE FROM tables WHERE id = `+req.body.id+``)
 
   }catch(err){
     console.log(err.message)
