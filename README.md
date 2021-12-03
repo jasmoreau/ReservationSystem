@@ -1,4 +1,4 @@
-# Work in Progress
+# COSC 4351
 
 
 To run the application first clone the repository
