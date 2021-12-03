@@ -1,8 +1,9 @@
 import React, {useState, useEffect } from 'react';
-import { Container } from './ReservationBoxElements';
+import { Container, FlexBox, Text, TextTitle, FlexWrap, Button, SubmitButton, FlexRegister, RegisterButton } from './ReservationBoxElements';
 import { NavBtn, NavBtnLink } from '../NavBar/NavBarElements'
 import { Payment } from '../Payment';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import { RegisterBox } from '../RegisterBox';
 
 
 export const ReservationBox = (props) => {
@@ -23,7 +24,7 @@ export const ReservationBox = (props) => {
         return new Promise( res => setTimeout(res, delay) );
     }
     
-    useEffect(async() => {
+    useEffect(() => {
         if (outsideSubmit) {
             createReservationNonEvent()
         }
@@ -93,53 +94,74 @@ export const ReservationBox = (props) => {
 
     return(
         <Container>
-            <label>Confirm Reservation</label>
-            <br />
+              <TextTitle>Confirm Reservation</TextTitle>
+         
             <form id="reservationForm" onSubmit={(event) => createReservation(event)}>
-            <div>
-                <label>
+            <FlexWrap >
+             <div>
+            <FlexBox>
+            <Text>Table Number: {props.id}</Text>
+            <Text>Table Size: {props.max_size}</Text>
+            <Text>Date: {props.date}</Text>
+            </FlexBox>
+            {!props.reservationPlaced && <Button onClick={()=>props.cancel(false)}>Cancel</Button>}
+            {!props.reservationPlaced && props.highTraffic && <SubmitButton type="submit">Submit</SubmitButton>}
+            {!props.reservationPlaced && !props.highTraffic && <SubmitButton type="submit">Submit</SubmitButton>}
+            {props.reservationPlaced && <p>Reservation has successfully been placed!</p>}
+                       </div>            
+          
+            <br />
+         
+            <FlexBox>
+                <Text>
                 First Name:
                 <input type="text" value={userFirstName} onChange={async (event) => {setUserFirstName(event.target.value)}} required />
-                </label>
-                <label>
+                </Text>
+                <Text>
                 Last Name:
                 <input type="text" value={userLastName} onChange={async (event) => {setUserLastName(event.target.value)}} required />
-                </label>
-                <label>
+                </Text>
+                <Text>
                 Phone:
                 <input type="number" value={phoneNumber} onChange={async (event) => {setPhoneNumber(event.target.value)}} required />
-                </label>
-                <label>
+                </Text>
+                <Text>
                 Email:
                 <input type="text" value={userEmail} onChange={async (event) => {setUserEmail(event.target.value)}} required />
-                </label>
-            </div>
-            <br/>
-            <label>Table Number: </label>
-            <br/>
-            <label>{props.id}</label>
-            <br/>
-            <label>Table Size: </label>
-            <br />
-            <label>{props.max_size}</label>
-            <br />
-            <label>Date: </label>
-            <br />
-            <label>{props.date}</label>
-            {!props.reservationPlaced && <button onClick={()=>props.cancel(false)}>Cancel</button>}
-            {!props.reservationPlaced && props.highTraffic && <button type="submit">Submit1</button>}
-            {!props.reservationPlaced && !props.highTraffic && <button type="submit">Submit2</button>}
-            {props.reservationPlaced && <p>Reservation has successfully been placed!</p>}
-            {props.userData[0].email == "" && 
-                (<div>You might want to
-                <NavBtn>
-                <NavBtnLink to='/register'>Register</NavBtnLink>
-                </NavBtn>
-                &nbsp; &nbsp; &nbsp;to earn points and pre-fill your information!</div>)}
-                
-            {props.highTraffic && <p><b>You will be required to enter valid payment details to make this reservation as this is a high traffic day / holiday ({props.highTraffic}) which has a $10 no show fee!</b></p>}
+                </Text>
+            </FlexBox>
+            
+            </FlexWrap>
+
             </form>
+           
+
+             {props.userData[0].email == "" && 
+                (
+                <FlexRegister>
+                <label>
+                    You might want to
+                </label>
+                <div>
+                <RegisterButton>
+                    <Link to="/register">
+                        Register
+                    </Link>
+                </RegisterButton>
+                </div>
+                <label>
+                to earn points and pre-fill your information!
+                </label>
+                </FlexRegister>)
+                }
+                
+            {props.highTraffic && 
+                <Text>
+                You will be required to enter valid payment details to make this reservation as this is a high traffic day / holiday ({props.highTraffic}) which has a $10 no show fee!
+                </Text>}
+
             {payment && <Payment outsideSubmit={outsideSubmit} setOutsideSubmit={setOutsideSubmit.bind(this)}></Payment>}
+        
             
         </Container>
     )

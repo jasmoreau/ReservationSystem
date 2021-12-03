@@ -80,7 +80,7 @@ export const NavBtn = styled.nav`
 export const NavBtnLink = styled(Link)`
   border-radius: 3px;
   background: #009999;
-  padding: 8px 20px;
+  padding: 8px 10px;
   color: #ffffff;
   font-size: 80%;
   outline: none;
@@ -96,3 +96,5 @@ export const NavBtnLink = styled(Link)`
     background:  #00cccc;
   }
 `;
+
+export const Flex

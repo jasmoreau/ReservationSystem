@@ -304,7 +304,7 @@ app.post('/getcombination', async(req, res) => {
 app.get('/api/getKey', async(req, res) => {
   try{
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1200, // Specify amount here
+      amount: 1000, // Specify amount here
       currency: "usd" // Specify currency here
     });
 

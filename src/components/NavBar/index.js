@@ -20,12 +20,12 @@ export const Navbar = () => {
             <NavLink to='/'>
                 <Logo  src={LogoImg}/>
             </NavLink>
-            <NavLink to='/register'>
-                Register
+            <NavLink to='/login'>
+                Login
             </NavLink>
             </NavMenu>
             <NavBtn>
-            <NavBtnLink to='/login'>LogIn</NavBtnLink>
+            <NavBtnLink to='/register'>Register</NavBtnLink>
             </NavBtn>
         </Nav>
         </>

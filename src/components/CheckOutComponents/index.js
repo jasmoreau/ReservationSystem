@@ -1,5 +1,6 @@
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
 import React, { useState } from 'react';
+import { SubmitButton } from './checkOutStyles';
 
 export const CheckOutComponent = (props) => {
   const stripe = useStripe();
@@ -37,7 +38,7 @@ export const CheckOutComponent = (props) => {
   return (
     <form onSubmit={(event) => {handleSubmit(event)}}>
       <PaymentElement />
-      <button disabled={!stripe}>Submit</button>
+      <SubmitButton disabled={!stripe}>Submit</SubmitButton>
     </form>
   )
 };
