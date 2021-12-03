@@ -178,7 +178,7 @@ catch(err){
 
 app.post('/updateData', withAuth, async(req, res) => {
   try{
-    const {userid,
+    var {userid,
             email,
             first_name,
             last_name,
@@ -187,13 +187,45 @@ app.post('/updateData', withAuth, async(req, res) => {
             points,
             preferred_payment,
             phone} = req.body;
+    if(phone == '')
+      phone = "NULL"
+    const res = await pool.query(`UPDATE customer SET phone=`+phone+`, first_name='`+first_name+`', last_name='`+last_name+`', mailing_addr='`+mailing_addr+`', billing_addr='`+billing_addr+`', preferred_payment='`+preferred_payment+`'
+    WHERE email = '`+req.email+`';`);
 
-    
   }catch(err){
     console.log(err.message)
   }
 });
 
+app.post('/checkowner', async(req, res) => {
+  try{
+    const token = 
+    req.body.token ||
+    req.query.token ||
+    req.headers['x-access-token'] ||
+    req.cookies.token;
+
+    if (!token) {
+    } else {
+      jwt.verify(token, secret, function(err, decoded) {
+        if (!err) {
+          user = true;
+          req.email = decoded.email;
+        }
+      });
+    }
+    
+    if(req.email && req.email=="owner@email.com"){
+      res.json(1)
+    }
+    else{
+      res.json(0)
+    }
+
+  }catch(err){
+    console.log(err.message)
+  }
+});
 
 app.post('/makeReservation', async(req, res) => {
   try{

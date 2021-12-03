@@ -70,7 +70,7 @@ export const AboutMeBox = (props) => {
 
     const submit = async (event) => {
         event.preventDefault();
-        const data = updateData;
+        const data = updateData();
         await fetch('/updateData',{
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -100,12 +100,12 @@ export const AboutMeBox = (props) => {
             <form onSubmit={submit}>
                 <label>
                 Email:
-                <input type="text" value={userEmail} onChange={async (event) => {setUserEmail(event.target.value)}} />
+                <input type="text" value={userEmail} onChange={async (event) => {setUserEmail(event.target.value)}} readonly />
                 </label>
                 <br />
                 <label>
                 First Name:
-                <input type="text" value={userFirstName} onChange={async (event) => {setUserFirstName(event.target.value)}} required/>
+                <input type="text" value={userFirstName} onChange={async (event) => {setUserFirstName(event.target.value)}}/>
                 </label>
                 <br />
                 <label>
@@ -125,12 +125,12 @@ export const AboutMeBox = (props) => {
                 <br />
                 <label>
                 Phone Number:
-                <input type="text" value={phoneNumber} onChange={async (event) => {setPhoneNumber(event.target.value)}} />
+                <input type="number" value={phoneNumber} onChange={async (event) => {setPhoneNumber(event.target.value)}} />
                 </label>
                 <br />
                 <label>
                 Points:
-                <input type="text" value={userPoints}  onChange={async (event) => {setPoints(event.target.value)}} />
+                <input type="text" value={userPoints}  onChange={async (event) => {setPoints(event.target.value)}} readonly />
                 </label>
                 <br />
                 <label>

@@ -12,7 +12,7 @@ import {
 } from './LoggedInBarElements';
 import LogoImg from './uh.png';
     
-export const LoggedInBar = () => {
+export const LoggedInBar = (props) => {
     const navigate = useNavigate();
 
     const logout = async () => {
@@ -34,6 +34,9 @@ export const LoggedInBar = () => {
             <NavLink to='/'>
                 <Logo  src={LogoImg}/>
             </NavLink>
+            {props.isOwner == 1 && <NavLink to='/combinations'>
+                Check All Combinations
+            </NavLink>}
             <NavLink to='/aboutme'>
                 Profile
             </NavLink>

@@ -18,14 +18,26 @@ export const Home = (props) => {
   const [showMessage, setShowMessage] = useState(false);
   const [data, setData] = useState('');
   const [startDate, setStartDate] = useState(today);
-  const [startDate2, setStartDate2] = useState(today);
-  const [endDate2, setEndDate2] = useState(tomorrow);
+  
   const [dateT, setDateT] = useState('');
   const [cannotSeat, setCannotSeat] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const [highTraffic, setHighTraffic] = useState(false);
   const [reservationPlaced, setReservationPlaced] = useState(false);
+  const [isOwner, setIsOwner] = useState(false);
+
+const ownerCheck = async () => {
+    const response = await fetch('/checkowner',{
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
+      });
+    const jsonResponse = await response.json();
+    if(jsonResponse == 1)
+      setIsOwner(true)
+    else
+      setIsOwner(false)
+  };
 
   const getData = async () => {
     const response = await fetch('/getData',{
@@ -48,13 +60,14 @@ export const Home = (props) => {
 
   useEffect(async () => {
     await getData();
+    await ownerCheck();
   }, []);
 
   return (
     <div>
       <div>
       {!loggedIn &&<div><Navbar/></div> }
-      {loggedIn && <div><LoggedInBar/></div>}
+      {loggedIn && <div><LoggedInBar isOwner={isOwner}/></div>}
       </div>
       <Search 
         setStartDate={setStartDate.bind(this)} 
@@ -87,12 +100,6 @@ export const Home = (props) => {
         userData={userData}
         reservationPlaced={reservationPlaced}
       />
-    <Combinations
-      setStartDate2={setStartDate2.bind(this)}
-      setEndDate2={setEndDate2.bind(this)}
-      startDate2={startDate2}
-      endDate2={endDate2}
-    />
     </div>
   );
   
